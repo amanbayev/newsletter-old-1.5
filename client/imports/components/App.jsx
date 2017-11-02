@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
+import { createContainer } from 'meteor/react-meteor-data'
+import {
+  BrowserRouter as Router,
+  Switch
+} from 'react-router-dom'
 
-import Menu from './Menu';
+import Authenticated from '/client/imports/components/Authenticated'
+import Public from '/client/imports/components/Public'
+import AdminComponent from '/client/imports/components/AdminComponent';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <nav className="navbar navbar-inverse navbar-fixed-top">
-          <div className="container">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-              </button>
-              <a className="navbar-brand" href="#">QT Newsletter</a>
-            </div>
-            <Menu />
-          </div>
-        </nav>
-        <div className="container">
-          <h1>Test</h1>
-        </div>{/* /.container */}
-      </div>
-    )
+import LoginContainer from '/client/imports/containers/LoginContainer';
+
+const App = props => (
+  <Router>
+    <div>
+      <Public exact path='/' component={ LoginContainer } {...props} />
+      <Public exact path="/login" component={ LoginContainer } {...props} />
+      <Authenticated path="/admin" component={ AdminComponent } {...props} />
+    </div>
+  </Router>
+)
+
+export default createContainer(() => {
+
+  const loggingIn = Meteor.loggingIn()
+  const user = Meteor.user()
+  const userId = Meteor.userId()
+  const loading = Roles.subscription ? !Roles.subscription.ready() : true
+
+  return {
+    loggingIn,
+    loading,
+    user,
+    userId,
+    authenticated: !loggingIn && !!userId,
+    roles: !loading && Roles.getRolesForUser(userId),
   }
-}
+}, App)

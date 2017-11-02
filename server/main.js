@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
+import '/imports/api/NewslettersCollection.js'
+
 Meteor.startup(() => {
   // code to run on server at startup
   Meteor.publish("allUsers", function(){
@@ -20,4 +22,16 @@ Meteor.startup(() => {
 
     Roles.addUsersToRoles(cResult, 'admin');
   }
+  // let cResult = Accounts.createUser({
+  //     username: 'marjan',
+  //     email: 'mtraispayeva@gmail.com',
+  //     password: '4thebest',
+  //     profile: {
+  //         first_name: 'Marjan',
+  //         last_name: 'Traispayeva',
+  //         company: 'Kazakh Tourism',
+  //     }
+  // });
+  //
+  // Roles.addUsersToRoles(cResult, 'editor');
 });
