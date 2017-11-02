@@ -2,11 +2,11 @@ import React from 'react'
 import { render } from 'react-dom'
 
 import App from '/client/imports/components/App';
-import LoginComponent from '/client/imports/components/LoginComponent';
+import LoginContainer from '/client/imports/containers/LoginContainer';
 
 Meteor.startup(function(){
   render(
-    <LoginComponent />,
+    <LoginContainer />,
     document.getElementById('render-target')
   )
 });
