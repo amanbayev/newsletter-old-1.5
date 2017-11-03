@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom'
+
 export default class UsersComponent extends Component {
   renderUsers() {
     let users = this.props.users
@@ -17,7 +19,12 @@ export default class UsersComponent extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="row">
+        <ol className="breadcrumb">
+          <li><Link to="/admin/dashboard">Дэшборд</Link></li>
+          <li className="active">Пользователи</li>
+        </ol>
+
         <h1>Пользователи</h1>
         <table className="table">
           <thead>

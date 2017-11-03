@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 
 import UsersComponent from '/client/imports/components/UsersComponent'
 
-export default createContainer( () => {
-  Meteor.subscribe("allUsers");
+export default withTracker( props => {
+  const handle = Meteor.subscribe("allUsers");
   return {
+    currentUser: Meteor.user(),
+    loading: !handle.ready(),
     users: Meteor.users.find().fetch(),
   }
-}, UsersComponent);
+})(UsersComponent);

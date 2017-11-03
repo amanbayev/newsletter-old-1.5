@@ -13,7 +13,7 @@ export default class LoginComponent extends Component {
     e.preventDefault();
     let login = this.state.inputLogin
     let password = this.state.inputPassword
-    console.log(login+" "+password);
+    // console.log(login+" "+password);
     Meteor.loginWithPassword(login, password, function(error){
       if (error) {
         Bert.alert({
