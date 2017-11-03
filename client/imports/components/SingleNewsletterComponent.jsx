@@ -3,6 +3,7 @@ import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 import NotFoundComponent from '/client/imports/components/NotFoundComponent'
+import CreateNewsModal from '/client/imports/components/CreateNewsModal'
 
 export default class SingleNewsletterComponent extends Component {
   constructor(props) {
@@ -60,10 +61,11 @@ export default class SingleNewsletterComponent extends Component {
                      onClick={this.props.history.goBack.bind(this)}
                     >Вернуться назад &nbsp;<i className="fa fa-arrow-left"></i></button>
                     <button className="btn btn-default btn-lg">Печать &nbsp;<i className="fa fa-print"></i></button>
-                    <button className="btn btn-default btn-lg">Добавить новость &nbsp;<i className="fa fa-plus"></i></button>
+                    <button className="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Добавить новость &nbsp;<i className="fa fa-plus"></i></button>
                     <button className="btn btn-primary btn-lg">Сохранить изменения &nbsp;<i className="fa fa-save"></i></button>
                   </div>
                 </div>
+                <CreateNewsModal />
               </div>
             </div>
           </div>
@@ -77,6 +79,7 @@ export default class SingleNewsletterComponent extends Component {
       )
     }
   }
+
   returnNewsletterName() {
     let singleNewsletter = this.props.singleNewsletter
     if (singleNewsletter)
